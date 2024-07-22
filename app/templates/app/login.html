@@ -1,0 +1,32 @@
+{% extends 'app/layout.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+	<div class="login-register-div">
+		<h1>Login</h1>
+
+		{% if message %}
+			<div class="message">
+				{{ message }}
+			</div>
+		{% endif %}
+
+		<form class="login-register-form" action="{% url 'login' %}" method="post">
+			{% csrf_token %}
+			<div>
+				<label>Username</label><br>
+				<input type="text" name="username" required>
+			</div>
+
+			<div>
+				<label>Password</label><br>
+				<input type="password" name="password" required>
+			</div>
+
+			<input type="submit" name="submit" value="Login">
+
+			<a href="{% url 'register' %}"><span class="white-a">No account?</span>&nbsp;Create a new account</a>
+		</form>
+	</div>
+{% endblock %}

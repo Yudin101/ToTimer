@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ToTimer{% endblock %}</title>
+    <link href="{% static 'app/styles.css' %}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f5888c4373.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'app/script.js' %}"></script>
+</head>
+<body>
+    <nav>
+        <div>
+            <h2>
+                <a href="{% url 'index' %}">ToTimer</a>
+            </h2>
+            <ul class="nav-ul">
+                {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'index' %}"><i class="fa-solid fa-house mobile"></i><span class="desktop">Home</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-info mobile"></i><span class="desktop">About</span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}"><i class="fa-solid fa-gear mobile"></i><span class="desktop">Logout</span></a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'login' %}"><i class="fa-solid fa-arrow-right-to-bracket mobile"></i><span class="desktop">Login</span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'register' %}"></i><span class="desktop">Register</span></a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>
