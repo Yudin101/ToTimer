@@ -9,7 +9,7 @@ from .models import *
 
 @login_required
 def index(request):
-    return render(request, 'app/layout.html')
+    return render(request, 'app/index.html')
 
 def user_login(request):
     if request.method == 'POST':

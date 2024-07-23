@@ -41,22 +41,32 @@ nav div {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding: 20px;
 }
 
 .nav-ul li {
     height: 100%;
-    font-size: 20px;
     list-style: none;
 }
 
-.nav-ul a {
+.nav-ul-button {
     color: gray;
+    font-size: 20px;
+    background: none;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0);
     transition: 0.1s;
+    cursor: pointer;
 }
 
-.nav-ul a:hover {
+.nav-ul-button:hover {
     color: white;
+    border-bottom: 1px solid white;
+}
+
+.nav-ul-button-selected {
+    color: white;
+    font-weight: 600;
+    border-bottom: 1px solid white;
 }
 
 .login-register-div {
@@ -67,14 +77,9 @@ nav div {
     align-items: center;
 }
 
-.login-register-div h1 {
-    color: white;
-    margin-bottom: 25px;
-}
-
 .message {
     font-size: 17px;
-    padding: 20px;
+    padding: 15px;
     margin-bottom: 10px;
     color: red;
     background-color: rgba(255, 0, 0, 0.2);
@@ -85,7 +90,7 @@ nav div {
 .login-register-form {
     color: white;
     background-color: rgba(255, 255, 255, 0.05);
-    height: 45%;
+    height: 65%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -97,7 +102,7 @@ nav div {
 }
 
 .register-form {
-    height: 60%;
+    height: 70%;
 }
 
 .login-register-form input {
@@ -150,6 +155,84 @@ nav div {
 .white-a {
     font-weight: 400;
     color: white;
+}
+
+.home-container {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background-color: blue;
+    background: rgba(200, 200, 200, 0.1);
+    padding: 50px 35px;
+    border-radius: 5px;
+}
+
+.top-buttons-div {
+    padding: 10px;
+    display: flex;
+}
+
+.top-button {
+    color: white;
+    font-size: 19px;
+    background: none;
+    padding: 10px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.top-button:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.top-button:active {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.top-button-selected {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#timer {
+    margin-bottom: 10px;
+    font-size: 100px;
+    font-weight: 700;
+}
+
+.timer-button {
+    padding: 10px 45px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.timer-button:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+#pause-button {
+    display: none;
+}
+
+
+
+
+
+.about-container {
+    display: none;
 }
 
 .mobile {

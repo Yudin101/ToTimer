@@ -19,20 +19,20 @@
             <ul class="nav-ul">
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="{% url 'index' %}"><i class="fa-solid fa-house mobile"></i><span class="desktop">Home</span></a>
+                        <button id="nav-ul-home" class="nav-ul-button nav-ul-button-selected"><i class="fa-solid fa-house mobile"></i><span class="desktop">Home</span></button>
                     </li>
                     <li>
-                        <a href="#"><i class="fa-solid fa-info mobile"></i><span class="desktop">About</span></a>
+                        <button id="nav-ul-about" class="nav-ul-button"><i class="fa-solid fa-info mobile"></i><span class="desktop">About</span></button>
                     </li>
                     <li>
-                        <a href="{% url 'logout' %}"><i class="fa-solid fa-gear mobile"></i><span class="desktop">Logout</span></a>
+                        <a class="nav-ul-button" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket mobile"></i><span class="desktop">Logout</span></a>
                     </li>
                 {% else %}
                     <li>
-                        <a href="{% url 'login' %}"><i class="fa-solid fa-arrow-right-to-bracket mobile"></i><span class="desktop">Login</span></a>
+                        <a class="nav-ul-button" href="{% url 'login' %}"><i class="fa-solid fa-arrow-right-to-bracket mobile"></i><span class="desktop">Login</span></a>
                     </li>
                     <li>
-                        <a href="{% url 'register' %}"></i><span class="desktop">Register</span></a>
+                        <a class="nav-ul-button" href="{% url 'register' %}"></i><span class="desktop">Register</span></a>
                     </li>
                 {% endif %}
             </ul>

@@ -4,7 +4,6 @@
 
 {% block body %}
 	<div class="login-register-div">
-		<h1>Login</h1>
 
 		{% if message %}
 			<div class="message">
@@ -13,6 +12,7 @@
 		{% endif %}
 
 		<form class="login-register-form" action="{% url 'login' %}" method="post">
+		<h1>Login</h1>
 			{% csrf_token %}
 			<div>
 				<label>Username</label><br>

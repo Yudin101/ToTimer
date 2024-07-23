@@ -1,1 +1,20 @@
 {% extends 'app/layout.html' %}
+
+{% block body %}
+	<div class="home-container">
+		<div class="timer-box">
+			<div class="top-buttons-div">
+				<button class="top-button top-button-selected" id="pomodoro-button">Pomodoro</button>
+				<button class="top-button" id="short-break-button">Short Break</button>
+				<button class="top-button" id="long-break-button">Long Break</button>
+			</div>
+			<p id="timer">25:00</p>
+			<button class="timer-button" id="start-button">Start</button>
+			<button class="timer-button" id="pause-button">Pause</button>
+		</div>
+	</div>
+
+	<div class="about-container">
+		This is the about page. More like will be about page.
+	</div>
+{% endblock %}
