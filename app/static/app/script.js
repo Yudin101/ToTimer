@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 	navBarFunction();
     timerBoxFunction();
+    loadTasks();
+    addTask();
+    taskCheck();
 });
 
 function navBarFunction() {
@@ -11,20 +14,10 @@ function navBarFunction() {
 	const aboutContainer = document.querySelector('.about-container');
 
 	aboutButton.addEventListener('click', () => {
-		// homeContainer.style.display = 'none';
-		// homeButton.classList.remove('nav-ul-button-selected');
-
-		// aboutContainer.style.display = 'flex';
-		// aboutButton.classList.add('nav-ul-button-selected');
 		loadPage(aboutButton, aboutContainer);
 	});
 
 	homeButton.addEventListener('click', () => {
-		// homeContainer.style.display = 'flex';
-		// homeButton.classList.add('nav-ul-button-selected');
-
-		// aboutContainer.style.display = 'none';
-		// aboutButton.classList.remove('nav-ul-button-selected');
 		loadPage(homeButton, homeContainer);
 	});
 
@@ -127,4 +120,71 @@ function timerBoxFunction() {
 
     // Initialize the timer as Pomodoro by default
     initializePomodoro();
+}
+
+
+function taskCheck() {
+    const tasksContainer = document.querySelector('.tasks');
+
+    tasksContainer.addEventListener('change', (event) => {
+        if (event.target.matches('.checkboxes')) {
+            const taskText = event.target.nextElementSibling;
+            if (event.target.checked) {
+                taskText.style.textDecoration = 'line-through';
+            } else {
+                taskText.style.textDecoration = 'none';
+            }
+        }
+    });
+}
+
+
+function addTask() {
+    document.querySelector('#task-form').onsubmit = () => {
+        const task = document.querySelector('#task-input').value;
+        const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+        fetch('/add/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify({
+                task: task
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            loadTasks();
+            document.querySelector('#task-input').value = ''
+        })
+
+        return false;
+    }
+}
+
+function loadTasks() {
+    const tasksList = document.querySelector('#tasks-list');
+
+    fetch(/load/)
+    .then(response => response.json())
+    .then(tasks => {
+        tasksList.innerHTML = '';
+
+        if (tasks.length === 0) {
+            tasksList.innerHTML = 'No Tasks!';
+        } else {
+            for (var i = 0; i < tasks.length; i++) {
+                const li = document.createElement('li');
+                li.classList.add('task');
+
+                li.innerHTML = `
+                    <input class="checkboxes" type="checkbox"> <span class="task-text">${tasks[i].task}</span>
+                `;
+
+                tasksList.appendChild(li);
+            }
+        }
+    })
 }

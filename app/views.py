@@ -1,3 +1,4 @@
+import json
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
@@ -10,6 +11,19 @@ from .models import *
 @login_required
 def index(request):
     return render(request, 'app/index.html')
+
+def add_task(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
+        Task(user=request.user, task=data['task']).save()
+
+        return JsonResponse({'message': 'Task added.'}, status=201)
+
+def load_tasks(request):
+    tasks = Task.objects.filter(user=request.user)
+
+    return JsonResponse([task.serialize() for task in tasks], safe=False)
 
 def user_login(request):
     if request.method == 'POST':

@@ -159,8 +159,9 @@ nav div {
 
 .home-container {
     height: 80%;
+    width: 100%;  
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -227,6 +228,73 @@ nav div {
     display: none;
 }
 
+.tasks-box {
+    color: white;
+    background: rgba(200, 200, 200, 0.1);
+    padding: 0 25px;
+    border-radius: 5px;
+    height: 80%;
+}
+
+.tasks-box-top {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid gray;
+}
+
+.tasks-clear-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.tasks-clear-button:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.tasks-box input[type="text"] {
+    color: white;
+    font-size: 17px;
+    background: none;
+    padding: 3px;
+    border: 1px solid white;
+    border-radius: 3px;
+    outline: none;
+}
+
+.tasks-box input[type="text"]:focus {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.tasks-add-button {
+    font-size: 17px;
+    background-color: white;
+    padding: 4px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.tasks-add-button:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.tasks {
+    height: 65%;
+    margin-top: 15px;
+    list-style: none;
+    overflow-y: scroll;
+}
+
+.task {
+    margin-bottom: 15px;
+}
 
 
 

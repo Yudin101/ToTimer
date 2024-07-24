@@ -12,6 +12,24 @@
 			<button class="timer-button" id="start-button">Start</button>
 			<button class="timer-button" id="pause-button">Pause</button>
 		</div>
+
+		<div class="tasks-box">
+			<div class="tasks-box-top">
+				<h1>Tasks</h1>
+				<button class="tasks-clear-button">Clear</button>
+			</div>
+
+			<form id="task-form">
+				{% csrf_token %}
+				<input id="task-input" type="text" name="task" placeholder="Add new task.." required>
+				<button class="tasks-add-button" type="submit">Add</button>
+			</form>
+
+			<div class="tasks">
+				<ul id="tasks-list">
+				</ul>
+			</div>
+		</div>
 	</div>
 
 	<div class="about-container">
