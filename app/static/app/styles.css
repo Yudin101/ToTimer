@@ -173,6 +173,7 @@ nav div {
     background-color: blue;
     background: rgba(200, 200, 200, 0.1);
     padding: 50px 35px;
+    margin-right: -250px;
     border-radius: 5px;
 }
 
@@ -208,6 +209,7 @@ nav div {
     margin-bottom: 10px;
     font-size: 100px;
     font-weight: 700;
+    visibility: visible;
 }
 
 .timer-button {
@@ -218,6 +220,7 @@ nav div {
     background-color: white;
     cursor: pointer;
     transition: 0.2s;
+    visibility: visible;
 }
 
 .timer-button:hover {
@@ -299,7 +302,6 @@ nav div {
     display: flex;
     padding: 10px 0;
     border-bottom: 1px solid gray;
-    visibility: visible;
 }
 
 .checkboxes {
@@ -349,6 +351,20 @@ nav div {
     color: dimgray;
 }
 
+/*During timer CSS*/
+
+.body-timer-bg {
+    background: black;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.tasks-box-timer-bg {
+    background: none;
+    border: 1px solid dimgray;
+}
 
 
 

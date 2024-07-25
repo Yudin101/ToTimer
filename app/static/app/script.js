@@ -102,21 +102,45 @@ function timerBoxFunction() {
                 timer.textContent = `${startingMinutes < 10 ? '0' + startingMinutes : startingMinutes}:00`;
                 startButton.style.display = 'block';
                 pauseButton.style.display = 'none';
+
+                body.classList.remove('body-timer-bg');
+                tasksBox.classList.remove('tasks-box-timer-bg');
+
+                nav.classList.remove('invisible');
+                timerBox.classList.remove('invisible');
             }
         }, 1000);
     }
 
+    const body = document.querySelector('body');
+    const nav = document.querySelector('nav');
+    const timerBox = document.querySelector('.timer-box');
+    const tasksBox = document.querySelector('.tasks-box');
+
     startButton.addEventListener('click', () => {
         clearInterval(intervalID);
+        startTimer(currentMinutes);
+        
         startButton.style.display = 'none';
         pauseButton.style.display = 'block';
-        startTimer(currentMinutes);
+
+        body.classList.add('body-timer-bg');
+        tasksBox.classList.add('tasks-box-timer-bg');
+
+        nav.classList.add('invisible');
+        timerBox.classList.add('invisible');
     });
 
     pauseButton.addEventListener('click', () => {
         clearInterval(intervalID);
         startButton.style.display = 'block';
         pauseButton.style.display = 'none';
+
+        body.classList.remove('body-timer-bg');
+        tasksBox.classList.remove('tasks-box-timer-bg');
+
+        nav.classList.remove('invisible');
+        timerBox.classList.remove('invisible');
     });
 
     // Initialize the timer as Focus by default
