@@ -25,6 +25,12 @@ def load_tasks(request):
 
     return JsonResponse([task.serialize() for task in tasks], safe=False)
 
+def clear_tasks(request):
+    if request.method == 'DELETE':
+        Task.objects.filter(user=request.user).delete()
+
+        return JsonResponse({'message': 'Cleared Tasks!'})
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']

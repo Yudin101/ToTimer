@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     timerBoxFunction();
     loadTasks();
     addTask();
-    taskCheck();
+    checkTask();
+    clearTasks();
 });
 
 function navBarFunction() {
@@ -37,7 +38,7 @@ function navBarFunction() {
 
 
 function timerBoxFunction() {
-	const pomodoroButton = document.querySelector('#pomodoro-button');
+	const focusButton = document.querySelector('#focus-button');
     const shortBreakButton = document.querySelector('#short-break-button');
     const longBreakButton = document.querySelector('#long-break-button');    
 
@@ -48,15 +49,15 @@ function timerBoxFunction() {
     let intervalID;
     let currentMinutes = 25;
 
-    // Set initial state to Pomodoro
-    function initializePomodoro() {
-        setButtonStates(pomodoroButton);
+    // Set initial state to Focus
+    function initializeFocus() {
+        setButtonStates(focusButton);
         currentMinutes = 25;
         timer.textContent = `25:00`;
     }
 
     function setButtonStates(selectedButton) {
-        [pomodoroButton, shortBreakButton, longBreakButton].forEach(button => {
+        [focusButton, shortBreakButton, longBreakButton].forEach(button => {
             button.classList.remove('top-button-selected');
             button.removeAttribute('disabled');
         });
@@ -65,8 +66,8 @@ function timerBoxFunction() {
         selectedButton.setAttribute('disabled', '');
     }
 
-    pomodoroButton.addEventListener('click', () => {
-        setButtonStates(pomodoroButton);
+    focusButton.addEventListener('click', () => {
+        setButtonStates(focusButton);
         currentMinutes = 25;
         timer.textContent = `25:00`;
     });
@@ -118,21 +119,21 @@ function timerBoxFunction() {
         pauseButton.style.display = 'none';
     });
 
-    // Initialize the timer as Pomodoro by default
-    initializePomodoro();
+    // Initialize the timer as Focus by default
+    initializeFocus();
 }
 
 
-function taskCheck() {
+function checkTask() {
     const tasksContainer = document.querySelector('.tasks');
 
     tasksContainer.addEventListener('change', (event) => {
         if (event.target.matches('.checkboxes')) {
             const taskText = event.target.nextElementSibling;
             if (event.target.checked) {
-                taskText.style.textDecoration = 'line-through';
+                taskText.classList.add('task-text-checked');
             } else {
-                taskText.style.textDecoration = 'none';
+                taskText.classList.remove('task-text-checked');
             }
         }
     });
@@ -164,6 +165,7 @@ function addTask() {
     }
 }
 
+
 function loadTasks() {
     const tasksList = document.querySelector('#tasks-list');
 
@@ -180,11 +182,38 @@ function loadTasks() {
                 li.classList.add('task');
 
                 li.innerHTML = `
-                    <input class="checkboxes" type="checkbox"> <span class="task-text">${tasks[i].task}</span>
+                    <input id="check${i}" class="checkboxes" type="checkbox"> <label for="check${i}" class="task-text">${tasks[i].task}</label>
                 `;
 
                 tasksList.appendChild(li);
             }
         }
     })
+}
+
+
+function clearTasks() {
+    const tasksList = document.querySelector('#tasks-list');
+    const clearTaskButton = document.querySelector('#tasks-clear-button');
+    const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+    clearTaskButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        fetch('clear/', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            while (tasksList.firstChild) {
+                tasksList.removeChild(tasksList.firstChild);
+            }
+            tasksList.innerHTML = 'No Tasks!';
+        })
+    });
+
+    return false;
 }

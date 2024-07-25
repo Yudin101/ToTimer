@@ -8,7 +8,7 @@
 
 body {
     height: 100vh;
-    background: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(39, 23, 65));
+    background: linear-gradient(to bottom right, rgb(0, 0, 20), rgb(39, 23, 65));
 }
 
 a {
@@ -244,7 +244,7 @@ nav div {
     border-bottom: 1px solid gray;
 }
 
-.tasks-clear-button {
+#tasks-clear-button {
     background: none;
     border: none;
     color: white;
@@ -253,7 +253,7 @@ nav div {
     transition: 0.1s;
 }
 
-.tasks-clear-button:hover {
+#tasks-clear-button:hover {
     color: rgba(255, 255, 255, 0.7);
 }
 
@@ -293,7 +293,60 @@ nav div {
 }
 
 .task {
-    margin-bottom: 15px;
+    max-width: 266px;
+    max-height: 35px;
+    overflow: scroll;
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid gray;
+    visibility: visible;
+}
+
+.checkboxes {
+    appearance: none;
+    -webkit-appearance: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    min-width: 20px;
+    margin-right: 5px;
+    cursor: pointer;
+    background: none;
+    border: 1px solid white;
+    border-radius: 5px;
+
+}
+
+.checkboxes:hover {
+    background-color: dimgray;
+}
+
+.checkboxes:after {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 15px;
+    content: "\f00c";
+    display: none;
+}
+
+.checkboxes:checked {
+    border-color: dimgray;
+    background-color: dimgray;
+}
+
+.checkboxes:checked:after {
+    display: block;
+}
+
+.task-text:hover {
+    color: dimgray;
+    cursor: pointer;
+}
+
+.task-text-checked {
+    text-decoration: line-through;
+    color: dimgray;
 }
 
 
