@@ -8,7 +8,8 @@
 
 body {
     height: 100vh;
-    background: linear-gradient(to bottom right, rgb(0, 0, 20), rgb(39, 23, 65));
+    background-color: #25223d;
+    transition: background-color 1s ease;
 }
 
 a {
@@ -26,6 +27,8 @@ i {
 nav {
     display: flex;
     justify-content: center;
+    opacity: 1;
+    transition: opacity 1s ease;
 }
 
 nav div {
@@ -170,11 +173,11 @@ nav div {
     flex-direction: column;
     align-items: center;
     color: white;
-    background-color: blue;
     background: rgba(200, 200, 200, 0.1);
     padding: 50px 35px;
     margin-right: -250px;
     border-radius: 5px;
+    transition: background 1s ease, border 1s ease;
 }
 
 .top-buttons-div {
@@ -209,7 +212,7 @@ nav div {
     margin-bottom: 10px;
     font-size: 100px;
     font-weight: 700;
-    visibility: visible;
+    opacity: 1;
 }
 
 .timer-button {
@@ -220,7 +223,6 @@ nav div {
     background-color: white;
     cursor: pointer;
     transition: 0.2s;
-    visibility: visible;
 }
 
 .timer-button:hover {
@@ -237,6 +239,7 @@ nav div {
     padding: 0 25px;
     border-radius: 5px;
     height: 80%;
+    transition: background 1s ease, border 1s ease;
 }
 
 .tasks-box-top {
@@ -321,7 +324,7 @@ nav div {
 }
 
 .checkboxes:hover {
-    background-color: dimgray;
+    background: rgba(105, 105, 105, 0.2);
 }
 
 .checkboxes:after {
@@ -334,7 +337,7 @@ nav div {
 
 .checkboxes:checked {
     border-color: dimgray;
-    background-color: dimgray;
+    background: none;
 }
 
 .checkboxes:checked:after {
@@ -351,17 +354,17 @@ nav div {
     color: dimgray;
 }
 
-/*During timer CSS*/
+/* During timer CSS */
 
 .body-timer-bg {
-    background: black;
+    background-color: black;
 }
 
 .invisible {
-    visibility: hidden;
+    opacity: 0;
 }
 
-.tasks-box-timer-bg {
+.boxes-timer-bg {
     background: none;
     border: 1px solid dimgray;
 }

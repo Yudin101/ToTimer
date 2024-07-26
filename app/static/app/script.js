@@ -100,11 +100,14 @@ function timerBoxFunction() {
             if (totalSeconds < 0) {
                 clearInterval(intervalID);
                 timer.textContent = `${startingMinutes < 10 ? '0' + startingMinutes : startingMinutes}:00`;
+
+                new Audio('static/app/time_up.mp3').play();
+
                 startButton.style.display = 'block';
                 pauseButton.style.display = 'none';
 
                 body.classList.remove('body-timer-bg');
-                tasksBox.classList.remove('tasks-box-timer-bg');
+                tasksBox.classList.remove('boxes-timer-bg');
 
                 nav.classList.remove('invisible');
                 timerBox.classList.remove('invisible');
@@ -114,6 +117,7 @@ function timerBoxFunction() {
 
     const body = document.querySelector('body');
     const nav = document.querySelector('nav');
+    const topButtonsDiv = document.querySelector('.top-buttons-div');
     const timerBox = document.querySelector('.timer-box');
     const tasksBox = document.querySelector('.tasks-box');
 
@@ -125,10 +129,10 @@ function timerBoxFunction() {
         pauseButton.style.display = 'block';
 
         body.classList.add('body-timer-bg');
-        tasksBox.classList.add('tasks-box-timer-bg');
+        tasksBox.classList.add('boxes-timer-bg');
 
         nav.classList.add('invisible');
-        timerBox.classList.add('invisible');
+        timerBox.classList.add('boxes-timer-bg');
     });
 
     pauseButton.addEventListener('click', () => {
@@ -137,10 +141,10 @@ function timerBoxFunction() {
         pauseButton.style.display = 'none';
 
         body.classList.remove('body-timer-bg');
-        tasksBox.classList.remove('tasks-box-timer-bg');
+        tasksBox.classList.remove('boxes-timer-bg');
 
         nav.classList.remove('invisible');
-        timerBox.classList.remove('invisible');
+        timerBox.classList.remove('boxes-timer-bg');
     });
 
     // Initialize the timer as Focus by default
