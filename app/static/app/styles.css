@@ -307,6 +307,11 @@ nav div {
     border-bottom: 1px solid gray;
 }
 
+.task > form {
+    width: 100%;
+    display: flex;
+}
+
 .checkboxes {
     appearance: none;
     -webkit-appearance: none;
@@ -345,7 +350,7 @@ nav div {
 }
 
 .task-text:hover {
-    color: dimgray;
+    color: rgba(105, 105, 105, 0.9);
     cursor: pointer;
 }
 

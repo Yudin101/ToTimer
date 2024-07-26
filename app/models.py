@@ -7,10 +7,12 @@ class User(AbstractUser):
 class Task(models.Model):
 	user = models.ForeignKey('User', on_delete=models.CASCADE, related_name='user')
 	task = models.TextField(blank=True)
+	checked = models.BooleanField(default=False)
 
 	def serialize(self):
 		return {
 			'id': self.id,
 			'user': self.user.id,
-			'task': self.task
+			'task': self.task,
+			'checked': self.checked
 		}

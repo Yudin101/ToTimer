@@ -12,4 +12,5 @@ urlpatterns = [
     path('add/', views.add_task, name='add'),
     path('load/', views.load_tasks, name='load'),
     path('clear/', views.clear_tasks, name='clear'),
+    path('check/', views.check_tasks, name='check'),
 ]

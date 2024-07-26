@@ -152,22 +152,6 @@ function timerBoxFunction() {
 }
 
 
-function checkTask() {
-    const tasksContainer = document.querySelector('.tasks');
-
-    tasksContainer.addEventListener('change', (event) => {
-        if (event.target.matches('.checkboxes')) {
-            const taskText = event.target.nextElementSibling;
-            if (event.target.checked) {
-                taskText.classList.add('task-text-checked');
-            } else {
-                taskText.classList.remove('task-text-checked');
-            }
-        }
-    });
-}
-
-
 function addTask() {
     document.querySelector('#task-form').onsubmit = () => {
         const task = document.querySelector('#task-input').value;
@@ -194,6 +178,7 @@ function addTask() {
 }
 
 
+
 function loadTasks() {
     const tasksList = document.querySelector('#tasks-list');
 
@@ -210,7 +195,10 @@ function loadTasks() {
                 li.classList.add('task');
 
                 li.innerHTML = `
-                    <input id="check${i}" class="checkboxes" type="checkbox"> <label for="check${i}" class="task-text">${tasks[i].task}</label>
+                    <form>
+                        <input type="hidden" value="${tasks[i].id}" name="id">
+                        <input id="check${i}" class="checkboxes" type="checkbox" ${tasks[i].checked ? 'checked' : ''}> <label for="check${i}" class="task-text ${tasks[i].checked ? 'task-text-checked' : ''}">${tasks[i].task}</label>
+                    </form>
                 `;
 
                 tasksList.appendChild(li);
@@ -218,6 +206,40 @@ function loadTasks() {
         }
     })
 }
+
+
+
+function checkTask() {
+    const tasksContainer = document.querySelector('.tasks');
+
+    tasksContainer.addEventListener('change', (event) => {
+        if (event.target.matches('.checkboxes')) {
+            const taskText = event.target.nextElementSibling;
+            const taskID = event.target.previousElementSibling.value;
+
+            if (event.target.checked) {
+                taskText.classList.add('task-text-checked');
+                fetch('/check/', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        id: taskID,
+                        checked: true
+                    })
+                });
+            } else {
+                taskText.classList.remove('task-text-checked');
+                fetch('/check/', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        id: taskID,
+                        checked: false
+                    })
+                });
+            }
+        }
+    });
+}
+
 
 
 function clearTasks() {

@@ -1,6 +1,7 @@
 import json
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
@@ -18,7 +19,7 @@ def add_task(request):
 
         Task(user=request.user, task=data['task']).save()
 
-        return JsonResponse({'message': 'Task added.'}, status=201)
+        return JsonResponse({'message': 'Task added!'}, status=201)
 
 def load_tasks(request):
     tasks = Task.objects.filter(user=request.user)
@@ -30,6 +31,20 @@ def clear_tasks(request):
         Task.objects.filter(user=request.user).delete()
 
         return JsonResponse({'message': 'Cleared Tasks!'})
+
+@csrf_exempt
+def check_tasks(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        task_id = data['id']
+
+        task = Task.objects.get(user=request.user, pk=task_id)
+
+        if data.get('checked') is not None:
+            task.checked = data['checked']
+        task.save()
+
+        return JsonResponse({'message': 'Task Checked!'}, status=201)
 
 def user_login(request):
     if request.method == 'POST':
