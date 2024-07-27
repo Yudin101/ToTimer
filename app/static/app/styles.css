@@ -377,7 +377,76 @@ nav div {
 
 
 .about-container {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 50px;
+    padding: 0 350px;
     display: none;
+}
+
+.about-sections {
+    width: 100%;
+    font-size: 18px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.about-sections h1 {
+    color: rgb(157, 154, 181);
+    margin-bottom: 10px;
+    font-size: 38px;
+}
+
+.external-links {
+    display: inline;
+}
+
+.wikipedia {
+    color: gray;
+}
+
+.wikipedia:hover {
+    color: dimgray;
+    text-decoration: underline;
+}
+
+footer {
+    padding: 10px 0;
+    border-radius: 10px;
+    border-top: 1px solid white;
+    background: rgba(200, 200, 200, 0.1);
+}
+
+.footer-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.footer-div .github {
+    color: rgb(157, 154, 181);
+}
+
+.creator-text {
+    margin: 10px 0;
+}
+
+.github:hover {
+    text-decoration: underline;
+}
+
+.footer-socials i {
+    font-size: 25px;
+}
+
+.foot-notes {
+    color: gray;
+    font-size: 15px;
+    text-align: center;
 }
 
 .mobile {
