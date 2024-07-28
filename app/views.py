@@ -21,16 +21,21 @@ def add_task(request):
 
         return JsonResponse({'message': 'Task added!'}, status=201)
 
+    else:
+        return HttpResponseRedirect(reverse('index'))
+
 def load_tasks(request):
     tasks = Task.objects.filter(user=request.user)
 
     return JsonResponse([task.serialize() for task in tasks], safe=False)
 
 def clear_tasks(request):
-    if request.method == 'DELETE':
-        Task.objects.filter(user=request.user).delete()
+    Task.objects.filter(user=request.user).delete()
 
+    if request.method == 'DELETE':
         return JsonResponse({'message': 'Cleared Tasks!'})
+    else:
+        return HttpResponseRedirect(reverse('index'))
 
 @csrf_exempt
 def check_tasks(request):
@@ -45,8 +50,13 @@ def check_tasks(request):
         task.save()
 
         return JsonResponse({'message': 'Task Checked!'}, status=201)
+    else:
+        return HttpResponseRedirect(reverse('index'))
 
 def user_login(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('index'))
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -68,6 +78,9 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('index'))
 
 def register(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('index'))
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
