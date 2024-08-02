@@ -40,6 +40,11 @@ nav div {
     border-bottom: 1px solid gray;
 }
 
+.title-text-link {
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
 .nav-ul {
     width: 60%;
     display: flex;
@@ -58,7 +63,8 @@ nav div {
     background: none;
     padding: 20px;
     border: 1px solid rgba(0, 0, 0, 0);
-    transition: 0.1s;
+    opacity: 1;
+    transition: color 0.1s, border 0.1s, opacity 1s ease;
     cursor: pointer;
 }
 
@@ -69,6 +75,8 @@ nav div {
 
 #nav-ul-logout a {
     color: gray;
+    opacity: 1;
+    transition: opacity 1s ease;
 }
 
 #nav-ul-logout:hover a {
@@ -278,9 +286,9 @@ nav div {
     color: white;
     font-size: 17px;
     background: none;
-    padding: 3px;
-    border: 1px solid white;
-    border-radius: 3px;
+    padding: 5px;
+    border: 2px solid white;
+    border-radius: 5px;
     outline: none;
 }
 

@@ -117,8 +117,11 @@ function timerBoxFunction() {
 
     const body = document.querySelector('body');
     const nav = document.querySelector('nav');
+    const titleTextLink = document.querySelector('.title-text-link');
     const navButtons = document.querySelectorAll('.nav-ul-button');
+    const logoutA = document.querySelector('.logout-a');
     const topButtonsDiv = document.querySelector('.top-buttons-div');
+    const topButtons = document.querySelectorAll('.top-button');
     const timerBox = document.querySelector('.timer-box');
     const tasksBox = document.querySelector('.tasks-box');
 
@@ -133,23 +136,32 @@ function timerBoxFunction() {
         tasksBox.classList.add('boxes-timer-bg');
 
         nav.classList.add('invisible');
+        titleTextLink.classList.add('invisible');
+        titleTextLink.setAttribute('onclick', 'return false;');
 
         navButtons.forEach(button => {
             button.classList.add('invisible');
             button.disabled = true;
         });
 
+        logoutA.classList.add('invisible');
+        logoutA.setAttribute('onclick', 'return false;');
+
         timerBox.classList.add('boxes-timer-bg');
 
+        function updateButtonState(buttons) {
+            buttons.forEach(button => {
+                button.classList.add('invisible');
+                button.disabled = true;
+            });
+        }
+
         if (currentMinutes === 25) {
-            shortBreakButton.classList.add('invisible');
-            longBreakButton.classList.add('invisible');
+            updateButtonState([shortBreakButton, longBreakButton]);
         } else if (currentMinutes === 5) {
-            focusButton.classList.add('invisible');
-            longBreakButton.classList.add('invisible');
+            updateButtonState([focusButton, longBreakButton]);
         } else {
-            focusButton.classList.add('invisible');
-            shortBreakButton.classList.add('invisible');
+            updateButtonState([focusButton, shortBreakButton]);
         }
     });
 
@@ -162,17 +174,23 @@ function timerBoxFunction() {
         tasksBox.classList.remove('boxes-timer-bg');
 
         nav.classList.remove('invisible');
+        titleTextLink.classList.remove('invisible');
+        titleTextLink.removeAttribute('onclick');
 
         navButtons.forEach(button => {
             button.classList.remove('invisible');
-            button.disabled = true;
+            button.disabled = false;
         });
+
+        logoutA.classList.remove('invisible');
+        logoutA.removeAttribute('onclick');
 
         timerBox.classList.remove('boxes-timer-bg');
 
-        focusButton.classList.remove('invisible');
-        shortBreakButton.classList.remove('invisible');
-        longBreakButton.classList.remove('invisible');
+        topButtons.forEach(button => {
+            button.classList.remove('invisible');
+            button.disabled = false;
+        });;
     });
 
     // Initialize the timer as Focus by default

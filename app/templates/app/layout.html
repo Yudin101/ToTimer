@@ -16,7 +16,7 @@
     <nav>
         <div>
             <h2>
-                <a href="{% url 'index' %}">ToTimer</a>
+                <a class="title-text-link" href="{% url 'index' %}">ToTimer</a>
             </h2>
             <ul class="nav-ul">
                 {% if user.is_authenticated %}
@@ -28,7 +28,7 @@
                     </li>
                     <li>
                         <button id="nav-ul-logout" class="nav-ul-button">
-                            <a href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket mobile"></i><span class="desktop">Logout</span></a>
+                            <a class="logout-a" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket mobile"></i><span class="desktop">Logout</span></a>
                         </button>
                     </li>
                 {% else %}
