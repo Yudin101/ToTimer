@@ -117,6 +117,7 @@ function timerBoxFunction() {
 
     const body = document.querySelector('body');
     const nav = document.querySelector('nav');
+    const navButtons = document.querySelectorAll('.nav-ul-button');
     const topButtonsDiv = document.querySelector('.top-buttons-div');
     const timerBox = document.querySelector('.timer-box');
     const tasksBox = document.querySelector('.tasks-box');
@@ -132,7 +133,24 @@ function timerBoxFunction() {
         tasksBox.classList.add('boxes-timer-bg');
 
         nav.classList.add('invisible');
+
+        navButtons.forEach(button => {
+            button.classList.add('invisible');
+            button.disabled = true;
+        });
+
         timerBox.classList.add('boxes-timer-bg');
+
+        if (currentMinutes === 25) {
+            shortBreakButton.classList.add('invisible');
+            longBreakButton.classList.add('invisible');
+        } else if (currentMinutes === 5) {
+            focusButton.classList.add('invisible');
+            longBreakButton.classList.add('invisible');
+        } else {
+            focusButton.classList.add('invisible');
+            shortBreakButton.classList.add('invisible');
+        }
     });
 
     pauseButton.addEventListener('click', () => {
@@ -144,7 +162,17 @@ function timerBoxFunction() {
         tasksBox.classList.remove('boxes-timer-bg');
 
         nav.classList.remove('invisible');
+
+        navButtons.forEach(button => {
+            button.classList.remove('invisible');
+            button.disabled = true;
+        });
+
         timerBox.classList.remove('boxes-timer-bg');
+
+        focusButton.classList.remove('invisible');
+        shortBreakButton.classList.remove('invisible');
+        longBreakButton.classList.remove('invisible');
     });
 
     // Initialize the timer as Focus by default

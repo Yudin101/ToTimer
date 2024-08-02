@@ -27,7 +27,9 @@
                         <button id="nav-ul-about" class="nav-ul-button"><i class="fa-solid fa-info mobile"></i><span class="desktop">About</span></button>
                     </li>
                     <li>
-                        <a class="nav-ul-button" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket mobile"></i><span class="desktop">Logout</span></a>
+                        <button id="nav-ul-logout" class="nav-ul-button">
+                            <a href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket mobile"></i><span class="desktop">Logout</span></a>
+                        </button>
                     </li>
                 {% else %}
                     <li>

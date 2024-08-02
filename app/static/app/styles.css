@@ -67,6 +67,14 @@ nav div {
     border-bottom: 1px solid white;
 }
 
+#nav-ul-logout a {
+    color: gray;
+}
+
+#nav-ul-logout:hover a {
+    color: white;
+}
+
 .nav-ul-button-selected {
     color: white;
     font-weight: 600;
@@ -195,7 +203,8 @@ nav div {
     border: none;
     border-radius: 7px;
     cursor: pointer;
-    transition: 0.1s;
+    opacity: 1;
+    transition: background 0.2s ease, opacity 1s ease;
 }
 
 .top-button:hover {
@@ -368,6 +377,7 @@ nav div {
 }
 
 .invisible {
+    cursor: default;
     opacity: 0;
 }
 
