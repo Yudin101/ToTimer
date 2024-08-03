@@ -115,7 +115,7 @@ function timerBoxFunction() {
         }, 1000);
     }
 
-    const body = document.querySelector('body');
+    let body = document.querySelector('body');
     const nav = document.querySelector('nav');
     const titleTextLink = document.querySelector('.title-text-link');
     const navButtons = document.querySelectorAll('.nav-ul-button');
@@ -126,6 +126,8 @@ function timerBoxFunction() {
     const tasksBox = document.querySelector('.tasks-box');
 
     startButton.addEventListener('click', () => {
+        let tasks = document.querySelectorAll('.task'); // Inside the event listener to get tasks only after they are loaded
+        
         clearInterval(intervalID);
         startTimer(currentMinutes);
         
@@ -133,6 +135,11 @@ function timerBoxFunction() {
         pauseButton.style.display = 'block';
 
         body.classList.add('body-timer-bg');
+
+        tasks.forEach(task => {
+            task.classList.add('body-timer-bg');
+        });
+
         tasksBox.classList.add('boxes-timer-bg');
 
         nav.classList.add('invisible');
@@ -171,6 +178,12 @@ function timerBoxFunction() {
         pauseButton.style.display = 'none';
 
         body.classList.remove('body-timer-bg');
+
+        tasks = document.querySelectorAll('.task');
+        tasks.forEach(task => {
+            task.classList.remove('body-timer-bg');
+        });
+
         tasksBox.classList.remove('boxes-timer-bg');
 
         nav.classList.remove('invisible');
@@ -226,6 +239,7 @@ function addTask() {
 
 
 function loadTasks() {
+    let body = document.querySelector('body');
     const tasksList = document.querySelector('#tasks-list');
 
     fetch(/load/)
@@ -238,10 +252,9 @@ function loadTasks() {
         } else {
             for (var i = 0; i < tasks.length; i++) {
                 const li = document.createElement('li');
-                li.classList.add('task');
 
                 li.innerHTML = `
-                    <form>
+                    <form class="task ${body.classList.contains('body-timer-bg') ? 'body-timer-bg' : ''}">
                         <input type="hidden" value="${tasks[i].id}" name="id">
                         <input id="check${i}" class="checkboxes" type="checkbox" ${tasks[i].checked ? 'checked' : ''}> <label for="check${i}" class="task-text ${tasks[i].checked ? 'task-text-checked' : ''}">${tasks[i].task}</label>
                     </form>

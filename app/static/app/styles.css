@@ -258,6 +258,7 @@ nav div {
     padding: 0 25px;
     border-radius: 5px;
     height: 80%;
+    overflow-y: hidden;
     transition: background 1s ease, border 1s ease;
 }
 
@@ -313,22 +314,22 @@ nav div {
 .tasks {
     height: 65%;
     margin-top: 15px;
-    list-style: none;
     overflow-y: scroll;
+}
+
+#tasks-list li {
+    list-style: none;
 }
 
 .task {
     max-width: 266px;
-    max-height: 35px;
-    overflow: scroll;
+    max-height: 60px;
     display: flex;
-    padding: 10px 0;
-    border-bottom: 1px solid gray;
-}
-
-.task > form {
-    width: 100%;
-    display: flex;
+    padding: 7px;
+    margin: 7px 0;
+    background-color: #25223d;
+    border-radius: 5px;
+    transition: background-color 1s ease;
 }
 
 .checkboxes {
@@ -344,6 +345,7 @@ nav div {
     background: none;
     border: 1px solid white;
     border-radius: 5px;
+    transition: 0.1s;
 
 }
 
@@ -366,6 +368,11 @@ nav div {
 
 .checkboxes:checked:after {
     display: block;
+}
+
+.task-text {
+    overflow: scroll;
+    transition: 0.1s;
 }
 
 .task-text:hover {
