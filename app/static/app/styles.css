@@ -9,7 +9,7 @@
 
 body {
     height: 100vh;
-    background-color: #25223d;
+    background-color: #4a2121;
     transition: background-color 1s ease;
 }
 
@@ -186,16 +186,20 @@ nav div {
     align-items: center;
 }
 
+.boxes {
+    color: white;
+    background: rgba(200, 200, 200, 0.1);
+    border: 1px solid #4a2121;
+    border-radius: 5px;
+    transition: background 1s ease, border 0.8s ease;
+}
+
 .timer-box {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
-    background: rgba(200, 200, 200, 0.1);
     padding: 50px 35px;
     margin-right: -250px;
-    border-radius: 5px;
-    transition: background 1s ease, border 1s ease;
 }
 
 .top-buttons-div {
@@ -208,11 +212,11 @@ nav div {
     font-size: 19px;
     background: none;
     padding: 10px;
-    border: none;
+    border: 1px solid #573333;
     border-radius: 7px;
     cursor: pointer;
     opacity: 1;
-    transition: background 0.2s ease, opacity 1s ease;
+    transition: background 0.2s ease, opacity 1s ease, border 1s ease;
 }
 
 .top-button:hover {
@@ -253,13 +257,9 @@ nav div {
 }
 
 .tasks-box {
-    color: white;
-    background: rgba(200, 200, 200, 0.1);
     padding: 0 25px;
-    border-radius: 5px;
     height: 80%;
     overflow-y: hidden;
-    transition: background 1s ease, border 1s ease;
 }
 
 .tasks-box-top {
@@ -327,7 +327,6 @@ nav div {
     display: flex;
     padding: 7px;
     margin: 7px 0;
-    background-color: #25223d;
     border-radius: 5px;
     transition: background-color 1s ease;
 }
@@ -383,6 +382,48 @@ nav div {
 .task-text-checked {
     text-decoration: line-through;
     color: dimgray;
+}
+
+/* Focus UI */
+
+.focus-body {
+    background-color: #4a2121;
+}
+
+.focus-boxes {
+    border: 1px solid #4a2121;
+}
+
+.focus-top-button {
+    border: 1px solid #573333;
+}
+
+/* Short Break UI */
+
+.short-break-body {
+    background-color: #454a1c;
+}
+
+.short-break-boxes {
+    border: 1px solid #454a1c;
+}
+
+.short-break-top-button {
+    border: 1px solid #53572e;
+}
+
+/* Long Break UI */
+
+.long-break-body {
+    background-color: #1c4a1c;
+}
+
+.long-break-boxes {
+    border: 1px solid #1c4a1c;
+}
+
+.long-break-top-button {
+    border: 1px solid #2e572e;
 }
 
 /* During timer CSS */

@@ -38,6 +38,19 @@ function navBarFunction() {
 
 
 function timerBoxFunction() {
+    let body = document.querySelector('body');
+    const nav = document.querySelector('nav');
+    const titleTextLink = document.querySelector('.title-text-link');
+    const navButtons = document.querySelectorAll('.nav-ul-button');
+    const logoutA = document.querySelector('.logout-a');
+
+    const topButtonsDiv = document.querySelector('.top-buttons-div');
+    const topButtons = document.querySelectorAll('.top-button');
+
+    const boxes = document.querySelectorAll('.boxes');
+    const timerBox = document.querySelector('.timer-box');
+    const tasksBox = document.querySelector('.tasks-box');
+
 	const focusButton = document.querySelector('#focus-button');
     const shortBreakButton = document.querySelector('#short-break-button');
     const longBreakButton = document.querySelector('#long-break-button');    
@@ -49,13 +62,6 @@ function timerBoxFunction() {
     let intervalID;
     let currentMinutes = 25;
 
-    // Set initial state to Focus
-    function initializeFocus() {
-        setButtonStates(focusButton);
-        currentMinutes = 25;
-        timer.textContent = `25:00`;
-    }
-
     function setButtonStates(selectedButton) {
         [focusButton, shortBreakButton, longBreakButton].forEach(button => {
             button.classList.remove('top-button-selected');
@@ -66,114 +72,71 @@ function timerBoxFunction() {
         selectedButton.setAttribute('disabled', '');
     }
 
+    function loadTopButtonUI(selectedButton) {
+        const topButtonsArr = ['focus', 'short-break', 'long-break'];
+
+        for (var i = 0; i < topButtonsArr.length; i++) {
+            body.classList.remove(`${topButtonsArr[i]}-body`);
+            boxes.forEach(box => {
+                box.classList.remove(`${topButtonsArr[i]}-boxes`);
+            });
+            topButtons.forEach(button => {
+                button.classList.remove(`${topButtonsArr[i]}-top-button`);
+            });
+        }
+
+        let selectedButtonName;
+        if (selectedButton === focusButton) {
+            selectedButtonName = 'focus';
+        } else if (selectedButton == shortBreakButton) {
+            selectedButtonName = 'short-break';
+        } else {
+            selectedButtonName = 'long-break';
+        }
+
+        body.classList.add(`${selectedButtonName}-body`);
+        boxes.forEach(box => {
+            box.classList.add(`${selectedButtonName}-boxes`);
+        })
+        topButtons.forEach(button => {
+            button.classList.add(`${selectedButtonName}-top-button`);
+        });
+    }
+
+    // Set initial state to Focus
+    function initializeFocus() {
+        setButtonStates(focusButton);
+        loadTopButtonUI(focusButton);
+
+        currentMinutes = 25;
+        timer.textContent = `25:00`;
+    }
+
     focusButton.addEventListener('click', () => {
         setButtonStates(focusButton);
+        loadTopButtonUI(focusButton);
+
         currentMinutes = 25;
         timer.textContent = `25:00`;
     });
 
     shortBreakButton.addEventListener('click', () => {
         setButtonStates(shortBreakButton);
+        loadTopButtonUI(shortBreakButton);
+
         currentMinutes = 5;
         timer.textContent = `05:00`;
     });
 
     longBreakButton.addEventListener('click', () => {
         setButtonStates(longBreakButton);
+        loadTopButtonUI(longBreakButton);
+
         currentMinutes = 15;
         timer.textContent = `15:00`;
     });
 
-    function startTimer(startingMinutes) {
-        let totalSeconds = (startingMinutes * 60) - 1;
-
-        intervalID = setInterval(() => {
-            let minutes = Math.floor(totalSeconds / 60);
-            let seconds = totalSeconds % 60;
-
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-            seconds = seconds < 10 ? '0' + seconds : seconds;
-
-            timer.textContent = `${minutes}:${seconds}`;
-            totalSeconds--;
-
-            if (totalSeconds < 0) {
-                clearInterval(intervalID);
-                timer.textContent = `${startingMinutes < 10 ? '0' + startingMinutes : startingMinutes}:00`;
-
-                new Audio('static/app/time_up.mp3').play();
-
-                startButton.style.display = 'block';
-                pauseButton.style.display = 'none';
-
-                body.classList.remove('body-timer-bg');
-                tasksBox.classList.remove('boxes-timer-bg');
-
-                nav.classList.remove('invisible');
-                timerBox.classList.remove('invisible');
-            }
-        }, 1000);
-    }
-
-    let body = document.querySelector('body');
-    const nav = document.querySelector('nav');
-    const titleTextLink = document.querySelector('.title-text-link');
-    const navButtons = document.querySelectorAll('.nav-ul-button');
-    const logoutA = document.querySelector('.logout-a');
-    const topButtonsDiv = document.querySelector('.top-buttons-div');
-    const topButtons = document.querySelectorAll('.top-button');
-    const timerBox = document.querySelector('.timer-box');
-    const tasksBox = document.querySelector('.tasks-box');
-
-    startButton.addEventListener('click', () => {
-        let tasks = document.querySelectorAll('.task'); // Inside the event listener to get tasks only after they are loaded
-        
-        clearInterval(intervalID);
-        startTimer(currentMinutes);
-        
-        startButton.style.display = 'none';
-        pauseButton.style.display = 'block';
-
-        body.classList.add('body-timer-bg');
-
-        tasks.forEach(task => {
-            task.classList.add('body-timer-bg');
-        });
-
-        tasksBox.classList.add('boxes-timer-bg');
-
-        nav.classList.add('invisible');
-        titleTextLink.classList.add('invisible');
-        titleTextLink.setAttribute('onclick', 'return false;');
-
-        navButtons.forEach(button => {
-            button.classList.add('invisible');
-            button.disabled = true;
-        });
-
-        logoutA.classList.add('invisible');
-        logoutA.setAttribute('onclick', 'return false;');
-
-        timerBox.classList.add('boxes-timer-bg');
-
-        function updateButtonState(buttons) {
-            buttons.forEach(button => {
-                button.classList.add('invisible');
-                button.disabled = true;
-            });
-        }
-
-        if (currentMinutes === 25) {
-            updateButtonState([shortBreakButton, longBreakButton]);
-        } else if (currentMinutes === 5) {
-            updateButtonState([focusButton, longBreakButton]);
-        } else {
-            updateButtonState([focusButton, shortBreakButton]);
-        }
-    });
-
-    pauseButton.addEventListener('click', () => {
-        clearInterval(intervalID);
+    function UIReset() {
         startButton.style.display = 'block';
         pauseButton.style.display = 'none';
 
@@ -202,8 +165,83 @@ function timerBoxFunction() {
 
         topButtons.forEach(button => {
             button.classList.remove('invisible');
+            button.classList.remove('boxes-timer-bg');
             button.disabled = false;
-        });;
+        });
+    }
+
+    function startTimer(startingMinutes) {
+        let totalSeconds = (startingMinutes * 60) - 1;
+
+        intervalID = setInterval(() => {
+            let minutes = Math.floor(totalSeconds / 60);
+            let seconds = totalSeconds % 60;
+
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            timer.textContent = `${minutes}:${seconds}`;
+            totalSeconds--;
+
+            if (totalSeconds < 0) {
+                clearInterval(intervalID);
+                timer.textContent = `${startingMinutes < 10 ? '0' + startingMinutes : startingMinutes}:00`;
+
+                new Audio('static/app/time_up.mp3').play();
+
+                UIReset();
+            }
+        }, 1000);
+    }
+
+    startButton.addEventListener('click', () => {
+        
+        clearInterval(intervalID);
+        startTimer(currentMinutes);
+        
+        startButton.style.display = 'none';
+        pauseButton.style.display = 'block';
+
+        body.classList.add('body-timer-bg');
+
+        boxes.forEach(box => {
+            box.classList.add('boxes-timer-bg');
+        });
+
+        nav.classList.add('invisible');
+        titleTextLink.classList.add('invisible');
+        titleTextLink.setAttribute('onclick', 'return false;');
+
+        navButtons.forEach(button => {
+            button.classList.add('invisible');
+            button.disabled = true;
+        });
+
+        logoutA.classList.add('invisible');
+        logoutA.setAttribute('onclick', 'return false;');
+
+        function updateButtonState(buttons) {
+            buttons.forEach(button => {
+                button.classList.add('invisible');
+                button.disabled = true;
+            });
+        }
+
+        if (currentMinutes === 25) {
+            focusButton.classList.add('boxes-timer-bg');
+            updateButtonState([shortBreakButton, longBreakButton]);
+        } else if (currentMinutes === 5) {
+            shortBreakButton.classList.add('boxes-timer-bg');
+            updateButtonState([focusButton, longBreakButton]);
+        } else {
+            longBreakButton.classList.add('boxes-timer-bg');
+            updateButtonState([focusButton, shortBreakButton]);
+        }
+    });
+
+    pauseButton.addEventListener('click', () => {
+        clearInterval(intervalID);
+        UIReset();
     });
 
     // Initialize the timer as Focus by default
