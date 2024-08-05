@@ -462,9 +462,13 @@ nav div {
 }
 
 .about-sections h1 {
-    color: rgb(157, 154, 181);
+/*    color: rgb(157, 154, 181);*/
     margin-bottom: 10px;
     font-size: 38px;
+}
+
+.about-sections p {
+    color: lightgray;
 }
 
 .external-links {
@@ -495,12 +499,12 @@ footer {
     font-size: 20px;
 }
 
-.footer-div .github {
-    color: rgb(157, 154, 181);
-}
-
 .creator-text {
     margin: 10px 0;
+}
+
+.footer-div .github {
+    color: lightgray;
 }
 
 .github:hover {
