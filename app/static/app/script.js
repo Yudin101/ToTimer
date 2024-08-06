@@ -292,7 +292,7 @@ function loadTasks() {
                 const li = document.createElement('li');
 
                 li.innerHTML = `
-                    <form class="task ${body.classList.contains('body-timer-bg') ? 'body-timer-bg' : ''}">
+                    <form class="task">
                         <input type="hidden" value="${tasks[i].id}" name="id">
                         <input id="check${i}" class="checkboxes" type="checkbox" ${tasks[i].checked ? 'checked' : ''}> <label for="check${i}" class="task-text ${tasks[i].checked ? 'task-text-checked' : ''}">${tasks[i].task}</label>
                     </form>

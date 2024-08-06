@@ -375,13 +375,13 @@ nav div {
 }
 
 .task-text:hover {
-    color: rgba(105, 105, 105, 0.9);
+    color: rgba(180, 180, 180, 1);
     cursor: pointer;
 }
 
 .task-text-checked {
     text-decoration: line-through;
-    color: dimgray;
+    color: rgba(140, 140, 140, 1);
 }
 
 /* Focus UI */
