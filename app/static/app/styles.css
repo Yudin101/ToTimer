@@ -314,7 +314,13 @@ nav div {
 .tasks {
     height: 65%;
     margin-top: 15px;
-    overflow-y: scroll;
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.tasks::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Edge */
 }
 
 #tasks-list li {
@@ -370,8 +376,14 @@ nav div {
 }
 
 .task-text {
-    overflow: scroll;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer and Edge */
     transition: 0.1s;
+}
+
+.task-text::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Edge */
 }
 
 .task-text:hover {
