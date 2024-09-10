@@ -49,8 +49,8 @@ pip install -r requirements.txt
 **Setup environment variables**
 
 ```bash
-echo "SECRET_KEY=your_secret_key" > .env
-echo "DEBUG=True" >> .env
+echo 'SECRET_KEY=your_secret_key' > .env
+echo 'DEBUG=True' >> .env
 ```
 *Replace `your_secret_key` with an actual secret key. You can generate one using [Django Secret Key Generator](https://djecrety.ir/).*
 
