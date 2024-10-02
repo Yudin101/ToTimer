@@ -1,5 +1,5 @@
 """
-WSGI config for pomodoro_timer project.
+WSGI config for totimer project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
